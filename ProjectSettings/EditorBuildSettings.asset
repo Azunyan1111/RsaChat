@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scene/start.unity
     guid: a04fd5ea114542d419db37a5c3424702
+  - enabled: 1
+    path: Assets/scene/NewAddress.unity
+    guid: 81a742966930b6747ad31328892c5b4b
