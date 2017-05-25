@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class GoToLoginSceneButton : MonoBehaviour {
+public class GoToSignInSceneButton : MonoBehaviour {
 
 	public void OnClick() {
-		SceneManager.LoadScene("Login");
+		SceneManager.LoadScene("SignIn");
 	}
 }
