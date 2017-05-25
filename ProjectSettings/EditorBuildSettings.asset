@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/scene/start.unity
     guid: a04fd5ea114542d419db37a5c3424702
   - enabled: 1
-    path: Assets/scene/NewAddress.unity
+    path: Assets/scene/SignUp.unity
     guid: 81a742966930b6747ad31328892c5b4b
   - enabled: 1
-    path: Assets/scene/Login.unity
+    path: Assets/scene/SignIn.unity
     guid: f2d135969271943408c5ef2a8dd3e1b2
+  - enabled: 1
+    path: Assets/scene/DataLoad.unity
+    guid: 9ab6abfe1212c904194a2a27888e6297
