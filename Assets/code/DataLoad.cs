@@ -17,6 +17,6 @@ public class DataLoad : MonoBehaviour {
 
 	void NextScene(){
 		// TODO: load main window
-		SceneManager.LoadScene("FriendList");
+		SceneManager.LoadScene("Start");
 	}
 }
