@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scene/DataLoad.unity
     guid: 9ab6abfe1212c904194a2a27888e6297
+  - enabled: 1
+    path: Assets/scene/FriendList.unity
+    guid: 3ed8a234dcdb3a749abc9ce43e8fd71e
