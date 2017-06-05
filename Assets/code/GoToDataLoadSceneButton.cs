@@ -15,8 +15,8 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 	string privateKey;
 
 	public void OnClick() {
-		username = UnityEngine.GameObject.Find("Input Username").GetComponent<InputField>().text;
-		password = UnityEngine.GameObject.Find("Input Password").GetComponent<InputField>().text;
+		username = UnityEngine.GameObject.Find("Username Input").GetComponent<InputField>().text;
+		password = UnityEngine.GameObject.Find("Password Input").GetComponent<InputField>().text;
 		errorMessage = UnityEngine.GameObject.Find("TextErrorMessage");
 		// RSA
 		// CreateKey("user_key");		
@@ -45,17 +45,6 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		errorMessage.GetComponent<Text>().text = "";		
 		
 		WWWForm form = new WWWForm();
-		// form.AddField("username", username);
-		// form.AddField("password", password);
-		// form.AddField("public_key_base64", public_key);
-		// form.AddField("terminal_hash", terminal_hash);
-		// var send_data = new
-		// {
-			// username = username_,
-			// fuga = "hello",
-			// abc = new[] { 10, 20, 30 },
-			// aaa = new[] { "x", "yy", "zzz" },
-		// };
 
 		var send_data = new 
 		{
@@ -64,8 +53,6 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 			public_key_base64 = public_key_,
 			terminal_hash = terminal_hash_,
 		};
-		// string send_data = "{\"username\": \"" + username_ + "\", \"password\": \"" + password_ + 
-						//  "\", \"public_key_base64\": \"" + public_key_ + "\", \"terminal_hash\": \"" + terminal_hash_ + "\"}";
 		string send_data_json = LitJson.JsonMapper.ToJson(send_data);
 		form.AddField("json", send_data_json);
 
