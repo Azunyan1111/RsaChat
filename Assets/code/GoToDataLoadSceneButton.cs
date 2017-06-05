@@ -11,7 +11,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 	string username;
 	string password;
 	UnityEngine.GameObject errorMessage;
-	string publickKey;
+	string publicKey;
 	string privateKey;
 
 	public void OnClick() {
@@ -41,7 +41,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		 
 	}
 
-    IEnumerator signup(string url, string username_, string password_, string public_key_, string terminal_hash_) {
+    IEnumerator signup(string url, string username_, string password_, string public_key_base64_, string terminal_hash_) {
 		errorMessage.GetComponent<Text>().text = "";		
 		
 		WWWForm form = new WWWForm();
@@ -50,7 +50,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		{
 			username = username_,
 			password = password_,
-			public_key_base64 = public_key_,
+			public_key_base64 = public_key_base64_,
 			terminal_hash = terminal_hash_,
 		};
 		string send_data_json = LitJson.JsonMapper.ToJson(send_data);
@@ -66,6 +66,10 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		}
 		if(www.text == "ok")
 		{
+			GameData.UserData.username = username_;
+			GameData.UserData.public_key_base64 = public_key_base64_;
+			GameData.UserData.terminal_hash = terminal_hash_;
+			GameData.Save();
 			SceneManager.LoadScene("DataLoad");			
 		}
 		else
@@ -99,7 +103,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 			KeyContainerName = keyContainerName
 		};
 		var csp = new RSACryptoServiceProvider(size, parameters);
-		publickKey = csp.ToXmlString(false);
+		publicKey = csp.ToXmlString(false);
 		privateKey = csp.ToXmlString(true);
 	}
 	private void DeleteKey(string keyContainerName)
