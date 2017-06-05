@@ -1,34 +1,73 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Text;
-
+using System.Security.Cryptography;
 
 public class GoToDataLoadSceneButton : MonoBehaviour {
 
 	string username;
 	string password;
 	UnityEngine.GameObject errorMessage;
+	string publickKey;
+	string privateKey;
 
 	public void OnClick() {
 		username = UnityEngine.GameObject.Find("Input Username").GetComponent<InputField>().text;
 		password = UnityEngine.GameObject.Find("Input Password").GetComponent<InputField>().text;
 		errorMessage = UnityEngine.GameObject.Find("TextErrorMessage");
+		// RSA
+		// CreateKey("user_key");		
 		if (SceneManager.GetActiveScene().name == "SignUp")
 		{
-			StartCoroutine(signup("http://0.0.0.0:5000/signup", username, password, "key", getRandamString(32)));				
+			StartCoroutine(signup("http://0.0.0.0:5000/signup", username, password, "key", getRandamString(32)));
+			/*
+			var crypt_dat = Encrypt(publickKey, "Hello World");
+			Debug.Log(crypt_dat);
+			var decrypt_data = Decrypt(privateKey, crypt_dat);
+			Debug.Log(decrypt_data);
+			CreateKey("user_key");
+			var decrypt_datas = Decrypt(privateKey, crypt_dat);
+			Debug.Log(decrypt_datas);			
+			DeleteKey("user_key");
+			*/
 		}
+		else if (SceneManager.GetActiveScene().name == "SignIn")
+		{
+			StartCoroutine(signup("http://0.0.0.0:5000/signin", username, password, "key", getRandamString(32)));			
+		}
+		 
 	}
 
-    IEnumerator signup(string url, string username, string password, string public_key, string terminal_hash) {
+    IEnumerator signup(string url, string username_, string password_, string public_key_, string terminal_hash_) {
 		errorMessage.GetComponent<Text>().text = "";		
 		
 		WWWForm form = new WWWForm();
-		form.AddField("username", username);
-		form.AddField("password", password);
-		form.AddField("public_key_base64", public_key);
-		form.AddField("terminal_hash", terminal_hash);
+		// form.AddField("username", username);
+		// form.AddField("password", password);
+		// form.AddField("public_key_base64", public_key);
+		// form.AddField("terminal_hash", terminal_hash);
+		// var send_data = new
+		// {
+			// username = username_,
+			// fuga = "hello",
+			// abc = new[] { 10, 20, 30 },
+			// aaa = new[] { "x", "yy", "zzz" },
+		// };
+
+		var send_data = new 
+		{
+			username = username_,
+			password = password_,
+			public_key_base64 = public_key_,
+			terminal_hash = terminal_hash_,
+		};
+		// string send_data = "{\"username\": \"" + username_ + "\", \"password\": \"" + password_ + 
+						//  "\", \"public_key_base64\": \"" + public_key_ + "\", \"terminal_hash\": \"" + terminal_hash_ + "\"}";
+		string send_data_json = LitJson.JsonMapper.ToJson(send_data);
+		form.AddField("json", send_data_json);
 
         // accsess
         WWW www = new WWW(url, form);
@@ -57,14 +96,49 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 
 		for (int i = 0; i < length; i++)
 		{
-			//文字の位置をランダムに選択
 			int pos = r.Next(passwordChars.Length);
-			//選択された位置の文字を取得
 			char c = passwordChars[pos];
-			//パスワードに追加
 			sb.Append(c);
 		}
 
 		return sb.ToString();
+	}
+
+	private void CreateKey(string keyContainerName)
+	{
+		var size = 1024;
+		var parameters = new CspParameters()
+		{
+			KeyContainerName = keyContainerName
+		};
+		var csp = new RSACryptoServiceProvider(size, parameters);
+		publickKey = csp.ToXmlString(false);
+		privateKey = csp.ToXmlString(true);
+	}
+	private void DeleteKey(string keyContainerName)
+	{
+		var parameters = new CspParameters()
+		{
+			KeyContainerName = keyContainerName
+		};
+		using (var csp = new RSACryptoServiceProvider(parameters))
+		{
+			csp.PersistKeyInCsp = false;
+			csp.Clear();
+		}
+	}
+	public string Encrypt(string publicKey, string data)
+	{
+		var csp = new RSACryptoServiceProvider();
+		csp.FromXmlString(publicKey);
+		var encryptedData = csp.Encrypt(Encoding.UTF8.GetBytes(data), false);
+		return Convert.ToBase64String(encryptedData);
+	}
+	private string Decrypt(string privateKey, string data)
+	{
+		var csp = new RSACryptoServiceProvider();
+		csp.FromXmlString(privateKey);
+		var decryptedData = csp.Decrypt(Convert.FromBase64String(data), false);
+		return Encoding.UTF8.GetString(decryptedData);
 	}
 }
