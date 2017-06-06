@@ -35,6 +35,7 @@ public class DataLoad : MonoBehaviour {
 		try{
 			GameData.UserData.friend_list = www.text;
 			Debug.Log(www.text);
+			GameData.Save();
 			SceneManager.LoadScene("FriendList");	
 		}
 		catch
