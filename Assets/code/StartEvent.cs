@@ -7,6 +7,7 @@ public class StartEvent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		GameData.Reset();
 		if (GameData.UserData.username != null)
 		{
 			SceneManager.LoadScene("DataLoad");

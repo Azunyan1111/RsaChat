@@ -20,9 +20,10 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		errorMessage = UnityEngine.GameObject.Find("TextErrorMessage");
 		// RSA
 		// CreateKey("user_key");		
+		string random_string = getRandamString(32);
 		if (SceneManager.GetActiveScene().name == "SignUp")
 		{
-			StartCoroutine(signup("http://0.0.0.0:5000/signup", username, password, "key", getRandamString(32)));
+			StartCoroutine(signup("http://0.0.0.0:5000/signup", username, password, "key", random_string));
 			/*
 			var crypt_dat = Encrypt(publickKey, "Hello World");
 			Debug.Log(crypt_dat);
@@ -36,7 +37,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		}
 		else if (SceneManager.GetActiveScene().name == "SignIn")
 		{
-			StartCoroutine(signup("http://0.0.0.0:5000/signin", username, password, "key", getRandamString(32)));			
+			StartCoroutine(signup("http://0.0.0.0:5000/signin", username, password, "key", random_string));			
 		}
 		 
 	}
