@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scene/Start.unity
+    path: Assets/scene/start.unity
     guid: a04fd5ea114542d419db37a5c3424702
   - enabled: 1
     path: Assets/scene/SignUp.unity
@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scene/NewFriend.unity
     guid: 6041501a45e116440b266e88eabce0c2
+  - enabled: 1
+    path: Assets/scene/Chat.unity
+    guid: e70e9a680a07746abbb82eb8cbf59a63

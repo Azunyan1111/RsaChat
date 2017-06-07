@@ -8,4 +8,6 @@ public class UserData{
 	public string terminal_hash;
 	public string friend_list;
 	public string no;
+	public string now_chat_friend;
+	public string now_chat_data;
 }

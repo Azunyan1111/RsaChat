@@ -29,20 +29,12 @@ public class DataLoad : MonoBehaviour {
 		// error print
 		if (!string.IsNullOrEmpty(www.error))
 		{
-			// re try
-			// SceneManager.LoadScene("DataLoad");
+			// Retry.
+			SceneManager.LoadScene("DataLoad");
 		}
-		try{
-			GameData.UserData.friend_list = www.text;
-			Debug.Log(www.text);
-			GameData.Save();
-			SceneManager.LoadScene("FriendList");	
-		}
-		catch
-		{
-			// re try
-			// Debug.Log(www.text);
-			// SceneManager.LoadScene("DataLoad");
-		}
+		GameData.UserData.friend_list = www.text;
+		Debug.Log(www.text);
+		GameData.Save();
+		SceneManager.LoadScene("FriendList");	
     }
 }
