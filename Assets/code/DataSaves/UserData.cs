@@ -10,4 +10,5 @@ public class UserData{
 	public string no;
 	public string now_chat_friend;
 	public string now_chat_data;
+	public string scroll_point;
 }

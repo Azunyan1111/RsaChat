@@ -11,8 +11,8 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 	string username;
 	string password;
 	UnityEngine.GameObject errorMessage;
-	string publicKey;
-	string privateKey;
+	// string publicKey;
+	// string privateKey;
 
 	public void OnClick() {
 		username = UnityEngine.GameObject.Find("Username Input").GetComponent<InputField>().text;
@@ -95,7 +95,7 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 
 		return sb.ToString();
 	}
-
+/*
 	private void CreateKey(string keyContainerName)
 	{
 		var size = 1024;
@@ -133,4 +133,5 @@ public class GoToDataLoadSceneButton : MonoBehaviour {
 		var decryptedData = csp.Decrypt(Convert.FromBase64String(data), false);
 		return Encoding.UTF8.GetString(decryptedData);
 	}
+	*/
 }
