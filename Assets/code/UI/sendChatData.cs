@@ -9,7 +9,10 @@ public class sendChatData : MonoBehaviour {
 
 	// Use this for initialization
 	public void OnClick() {
+		//get chat data
 		var text = GameObject.Find("SendChatInput").GetComponent<InputField>().text;
+		// re set chat data
+		GameObject.Find("SendChatInput").GetComponent<InputField>().text = "";
 		// set chat test.
 		StartCoroutine(set_chat("http://0.0.0.0:5000/set_chat", 
 								GameData.UserData.username, GameData.UserData.now_chat_friend,
