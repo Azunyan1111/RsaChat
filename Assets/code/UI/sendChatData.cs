@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class sendChatData : MonoBehaviour {
 
 
-	[SerializeField]
-	RectTransform prefab_my = null;
 
 	// Use this for initialization
 	public void OnClick() {

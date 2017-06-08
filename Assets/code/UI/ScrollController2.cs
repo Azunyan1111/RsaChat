@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+// using UnityEngine.UI.ScrollRect;
 
 public class ScrollController2 : MonoBehaviour {
 
@@ -8,13 +9,20 @@ public class ScrollController2 : MonoBehaviour {
 	RectTransform prefab_my = null;
 	[SerializeField]
 	RectTransform prefab_friend = null;
+	[SerializeField]	
+	ScrollRect myScrollRect;
 	/* timer */
 	public static float timeleft;
 
-	/*
+	
 	void Start () 
 	{
 
+			var item = GameObject.Instantiate(prefab_my) as RectTransform;
+			item.SetParent(transform, false);
+			var text = item.GetComponentInChildren<Text>();			
+			text.text = "Now Loading"; 
+	
 		/* frast chat print 
 		// get chat data. and save now_chat_data.
 		StartCoroutine(get_chat("http://0.0.0.0:5000/get_chat", 
@@ -40,43 +48,16 @@ public class ScrollController2 : MonoBehaviour {
 				var text = item.GetComponentInChildren<Text>();			
 				text.text = jsonData[i]["chat"].ToString();			
 			}
-		}
-	} */
+		}*/
+	} 
 	void Update () 
 	{
 		timeleft -= Time.deltaTime;
         if (timeleft <= 0.0) {
             timeleft = 10.0f;
-			// remove all chat object
-			foreach ( Transform n in GameObject.Find("Content_").transform )
-			{
-				GameObject.Destroy(n.gameObject);
-			}
 			// get chat data. and save now_chat_data.
 			StartCoroutine(get_chat("http://0.0.0.0:5000/get_chat", 
 									GameData.UserData.username, GameData.UserData.now_chat_friend, GameData.UserData.terminal_hash));
-			// get saved chat data.
-			string cat_data = GameData.UserData.now_chat_data;
-			// to json.
-			LitJson.JsonData jsonData =  LitJson.JsonMapper.ToObject(cat_data);
-			// print chats.
-			for (int i = 0; i < jsonData.Count; i ++)
-			{	
-				if(jsonData[i]["user"].ToString() == GameData.UserData.username)
-				{
-					var item = GameObject.Instantiate(prefab_my) as RectTransform;
-					item.SetParent(transform, false);
-					var text = item.GetComponentInChildren<Text>();			
-					text.text = jsonData[i]["chat"].ToString();
-				}
-				else
-				{
-					var item = GameObject.Instantiate(prefab_friend) as RectTransform;	
-					item.SetParent(transform, false);
-					var text = item.GetComponentInChildren<Text>();			
-					text.text = jsonData[i]["chat"].ToString();			
-				}
-			}
         }
 	}	
 
@@ -105,6 +86,35 @@ public class ScrollController2 : MonoBehaviour {
 		GameData.UserData.now_chat_data = www.text;
 		GameData.Save();
 		Debug.Log("end get chat.");
-		Debug.Log(www.text);
+
+
+			// remove all chat object
+		foreach ( Transform n in GameObject.Find("Content_").transform )
+		{
+			GameObject.Destroy(n.gameObject);
+		}
+
+		// get saved chat data.
+		string cat_data = GameData.UserData.now_chat_data;
+		// to json.
+		LitJson.JsonData jsonData =  LitJson.JsonMapper.ToObject(cat_data);
+		// print chats.
+		for (int i = 0; i < jsonData.Count; i ++)
+		{	
+			if(jsonData[i]["user"].ToString() == GameData.UserData.username)
+			{
+				var item = GameObject.Instantiate(prefab_my) as RectTransform;
+				item.SetParent(transform, false);
+				var text = item.GetComponentInChildren<Text>();			
+				text.text = jsonData[i]["chat"].ToString();
+			}
+			else
+			{
+				var item = GameObject.Instantiate(prefab_friend) as RectTransform;	
+				item.SetParent(transform, false);
+				var text = item.GetComponentInChildren<Text>();			
+				text.text = jsonData[i]["chat"].ToString();			
+			}
+		}
     }
 }
