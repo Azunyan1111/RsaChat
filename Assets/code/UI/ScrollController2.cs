@@ -17,7 +17,7 @@ public class ScrollController2 : MonoBehaviour {
 	
 	void Start () 
 	{
-
+            timeleft = 0.1f;			
 			var item = GameObject.Instantiate(prefab_my) as RectTransform;
 			item.SetParent(transform, false);
 			var text = item.GetComponentInChildren<Text>();			
@@ -97,6 +97,7 @@ public class ScrollController2 : MonoBehaviour {
 		// get saved chat data.
 		string cat_data = GameData.UserData.now_chat_data;
 		// to json.
+		Debug.Log(www.text);
 		LitJson.JsonData jsonData =  LitJson.JsonMapper.ToObject(cat_data);
 		// print chats.
 		for (int i = 0; i < jsonData.Count; i ++)
