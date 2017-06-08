@@ -24,12 +24,12 @@ public class ScrollController3 : MonoBehaviour {
 	{
 		timeleft -= Time.deltaTime;
         if (timeleft <= 0.0) {
-            timeleft = 5.0f;
+            timeleft = 20.0f;
 			// set new friend zone
-			// StartCoroutine(set_new_firend_zone("http://0.0.0.0:5000/set_new_friend_zone", 
-												// GameData.UserData.username, GameData.UserData.terminal_hash));
+			StartCoroutine(set_new_firend_zone("http://192.168.1.4:5000/set_new_friend_zone", 
+												GameData.UserData.username, GameData.UserData.terminal_hash));
 			// get new friend zone
-			StartCoroutine(get_new_firend_zone("http://0.0.0.0:5000/get_new_friend_zone", 
+			StartCoroutine(get_new_firend_zone("http://192.168.1.4:5000/get_new_friend_zone", 
 												GameData.UserData.username, GameData.UserData.terminal_hash));
 			
         }
@@ -84,6 +84,13 @@ public class ScrollController3 : MonoBehaviour {
 		
 
 		string[] friend_list = www.text.Split(',');
+		if(friend_list.Length == 1)
+		{
+			var item = GameObject.Instantiate(prefab_my) as RectTransform;
+			item.SetParent(transform, false);
+			var text = item.GetComponentInChildren<Text>();
+			text.text = "Online user not found";
+		}
 		foreach (string stData in friend_list) {
 			if(stData == GameData.UserData.username)
 			{

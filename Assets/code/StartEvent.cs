@@ -8,6 +8,9 @@ public class StartEvent : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameData.Reset();
+		Screen.fullScreen = false;
+		// ApplicationChrome.statusBarState = ApplicationChrome.States.Visible;
+		// ApplicationChrome.navigationBarState= ApplicationChrome.States.Visible;
 		if (GameData.UserData.username != null)
 		{
 			SceneManager.LoadScene("DataLoad");

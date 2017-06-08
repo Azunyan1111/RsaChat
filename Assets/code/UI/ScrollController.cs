@@ -10,11 +10,15 @@ public class ScrollController : MonoBehaviour {
 	void Start () 
 	{
 		// add friend
-		StartCoroutine(get_friend("http://0.0.0.0:5000/get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
+		StartCoroutine(get_friend("http://192.168.1.4:5000/get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
 
 		Debug.Log(GameData.UserData.friend_list);		
 		string[] friend_list = GameData.UserData.friend_list.Split(',');
 		foreach (string stData in friend_list) {
+			if(stData == GameData.UserData.username)
+			{
+				continue;
+			}
 			var item = GameObject.Instantiate(prefab) as RectTransform;
 			item.SetParent(transform, false);
 			var text = item.GetComponentInChildren<Text>();

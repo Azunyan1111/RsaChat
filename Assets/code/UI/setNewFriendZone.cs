@@ -8,15 +8,18 @@ public class setNewFriendZone : MonoBehaviour {
 	public void OnClick() {
 		var text = this.GetComponentInChildren<Text>();
 		GameData.UserData.now_chat_friend = text.text;
-		
+		if(text.text == "Online user not found")
+		{
+			return;
+		}
 
 		// get new friend zone
-		StartCoroutine(new_friend_zone_add_friend("http://0.0.0.0:5000/new_friend_zone_add_friend", 
+		StartCoroutine(new_friend_zone_add_friend("http://192.168.1.4:5000/new_friend_zone_add_friend", 
 											GameData.UserData.username, text.text, GameData.UserData.terminal_hash));
 		
 		
 
-		SceneManager.LoadScene("Chat");	
+		SceneManager.LoadScene("DataLoad");	
 	}
 
 	IEnumerator new_friend_zone_add_friend(string url, string username_, string friend_username_, string terminal_hash_) {

@@ -25,7 +25,7 @@ public class ScrollController2 : MonoBehaviour {
 	
 		/* frast chat print 
 		// get chat data. and save now_chat_data.
-		StartCoroutine(get_chat("http://0.0.0.0:5000/get_chat", 
+		StartCoroutine(get_chat("http://192.168.1.4:5000/get_chat", 
 								GameData.UserData.username, GameData.UserData.now_chat_friend, GameData.UserData.terminal_hash));
 		// get saved chat data.
 		string cat_data = GameData.UserData.now_chat_data;
@@ -55,8 +55,17 @@ public class ScrollController2 : MonoBehaviour {
 		timeleft -= Time.deltaTime;
         if (timeleft <= 0.0) {
             timeleft = 10.0f;
+			if(GameData.UserData.now_chat_friend == null)
+			{
+				var item = GameObject.Instantiate(prefab_my) as RectTransform;
+				item.SetParent(transform, false);
+				var text = item.GetComponentInChildren<Text>();			
+				text.text = "Chat user not found."; 
+				timeleft = 10000000.0f;				
+				return;
+			}
 			// get chat data. and save now_chat_data.
-			StartCoroutine(get_chat("http://0.0.0.0:5000/get_chat", 
+			StartCoroutine(get_chat("http://192.168.1.4:5000/get_chat", 
 									GameData.UserData.username, GameData.UserData.now_chat_friend, GameData.UserData.terminal_hash));
         }
 	}	
