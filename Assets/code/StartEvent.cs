@@ -9,8 +9,8 @@ public class StartEvent : MonoBehaviour {
 	void Start () {
 		GameData.Reset();
 		Screen.fullScreen = false;
-		// ApplicationChrome.statusBarState = ApplicationChrome.States.Visible;
-		// ApplicationChrome.navigationBarState= ApplicationChrome.States.Visible;
+		GameData.UserData.url = "http://192.168.1.4:5000/";
+		GameData.Save();
 		if (GameData.UserData.username != null)
 		{
 			SceneManager.LoadScene("DataLoad");

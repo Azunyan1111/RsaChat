@@ -14,7 +14,7 @@ public class sendChatData : MonoBehaviour {
 		// re set chat data
 		GameObject.Find("SendChatInput").GetComponent<InputField>().text = "";
 		// set chat test.
-		StartCoroutine(set_chat("http://192.168.1.4:5000/set_chat", 
+		StartCoroutine(set_chat(GameData.UserData.url + "set_chat", 
 								GameData.UserData.username, GameData.UserData.now_chat_friend,
 								text, GameData.UserData.terminal_hash));
 		ScrollController2.timeleft = 0.1f;

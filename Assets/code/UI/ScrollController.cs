@@ -6,18 +6,38 @@ public class ScrollController : MonoBehaviour {
 
 	[SerializeField]
 	RectTransform prefab = null;
+	[SerializeField]
+	RectTransform my_line = null;
+	[SerializeField]
+	RectTransform friend_line = null;
 
 	void Start () 
 	{
 		// add friend
-		StartCoroutine(get_friend("http://192.168.1.4:5000/get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
+		StartCoroutine(get_friend(GameData.UserData.url + "get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
 
-		Debug.Log(GameData.UserData.friend_list);		
+		// my profile and line
+		// add line
+		var item_my_line = GameObject.Instantiate(my_line) as RectTransform;
+		item_my_line.SetParent(transform, false);
+		// my profile
+		var item_my = GameObject.Instantiate(prefab) as RectTransform;
+		item_my.SetParent(transform, false);
+		var text_my = item_my.GetComponentInChildren<Text>();
+		text_my.text = GameData.UserData.username;
+		// friend line
+		var item_friend_line = GameObject.Instantiate(friend_line) as RectTransform;
+		item_friend_line.SetParent(transform, false);
+
 		string[] friend_list = GameData.UserData.friend_list.Split(',');
+		// not internet
+		if (friend_list.Length == 1){ return; }				
+		
+		// add friend
 		foreach (string stData in friend_list) {
 			if(stData == GameData.UserData.username)
 			{
-				continue;
+				continue;				
 			}
 			var item = GameObject.Instantiate(prefab) as RectTransform;
 			item.SetParent(transform, false);

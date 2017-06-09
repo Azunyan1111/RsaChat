@@ -48,7 +48,7 @@ abstract public class SavableSingleton<T> where T : SavableSingleton<T>, new()
  
     public static void Load()
     {
-        T ret = null;
+        // T ret = null;
         Debug.Log (typeof(T).Name + "Load Start");
         string json = "";
  

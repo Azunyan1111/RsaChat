@@ -25,7 +25,7 @@ public class ScrollController2 : MonoBehaviour {
 	
 		/* frast chat print 
 		// get chat data. and save now_chat_data.
-		StartCoroutine(get_chat("http://192.168.1.4:5000/get_chat", 
+		StartCoroutine(get_chat(GameData.UserData.url + "get_chat", 
 								GameData.UserData.username, GameData.UserData.now_chat_friend, GameData.UserData.terminal_hash));
 		// get saved chat data.
 		string cat_data = GameData.UserData.now_chat_data;
@@ -65,7 +65,7 @@ public class ScrollController2 : MonoBehaviour {
 				return;
 			}
 			// get chat data. and save now_chat_data.
-			StartCoroutine(get_chat("http://192.168.1.4:5000/get_chat", 
+			StartCoroutine(get_chat(GameData.UserData.url + "get_chat", 
 									GameData.UserData.username, GameData.UserData.now_chat_friend, GameData.UserData.terminal_hash));
         }
 	}	

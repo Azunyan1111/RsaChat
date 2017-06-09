@@ -14,7 +14,7 @@ public class setNewFriendZone : MonoBehaviour {
 		}
 
 		// get new friend zone
-		StartCoroutine(new_friend_zone_add_friend("http://192.168.1.4:5000/new_friend_zone_add_friend", 
+		StartCoroutine(new_friend_zone_add_friend(GameData.UserData.url + "new_friend_zone_add_friend", 
 											GameData.UserData.username, text.text, GameData.UserData.terminal_hash));
 		
 		

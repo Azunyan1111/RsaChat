@@ -7,7 +7,7 @@ public class DataLoad : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(get_friend("http://192.168.1.4:5000/get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
+		StartCoroutine(get_friend(GameData.UserData.url + "get_friend", GameData.UserData.username, GameData.UserData.terminal_hash));
 		// Invoke("NextScene", 2.5f);
 	}
 	

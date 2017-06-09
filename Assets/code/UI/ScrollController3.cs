@@ -26,10 +26,10 @@ public class ScrollController3 : MonoBehaviour {
         if (timeleft <= 0.0) {
             timeleft = 20.0f;
 			// set new friend zone
-			StartCoroutine(set_new_firend_zone("http://192.168.1.4:5000/set_new_friend_zone", 
+			StartCoroutine(set_new_firend_zone(GameData.UserData.url + "set_new_friend_zone", 
 												GameData.UserData.username, GameData.UserData.terminal_hash));
 			// get new friend zone
-			StartCoroutine(get_new_firend_zone("http://192.168.1.4:5000/get_new_friend_zone", 
+			StartCoroutine(get_new_firend_zone(GameData.UserData.url + "get_new_friend_zone", 
 												GameData.UserData.username, GameData.UserData.terminal_hash));
 			
         }
