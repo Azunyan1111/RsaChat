@@ -31,7 +31,7 @@ public class ScrollController : MonoBehaviour {
 
 		string[] friend_list = GameData.UserData.friend_list.Split(',');
 		// not internet
-		if (friend_list.Length == 1){ return; }				
+		if (friend_list.Length == 0){ return; }				
 		
 		// add friend
 		foreach (string stData in friend_list) {

@@ -9,8 +9,8 @@ public class StartEvent : MonoBehaviour {
 	void Start () {
 		GameData.Reset();
 		Screen.fullScreen = false;
-		GameData.UserData.url = "http://192.168.1.4:5000/";
-		GameData.Save();
+		// GameData.UserData.url = "http://192.168.1.4:5000/";
+		StartCoroutine(get_server_ip("http://azunyan.me/chat_api/"));
 		if (GameData.UserData.username != null)
 		{
 			SceneManager.LoadScene("DataLoad");
@@ -22,4 +22,20 @@ public class StartEvent : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	IEnumerator get_server_ip(string url) {
+		
+		// WWWForm form = new WWWForm();
+        // accsess
+        WWW www = new WWW(url);//, form);
+        yield return www;
+		// error print
+		if (!string.IsNullOrEmpty(www.error))
+		{
+			// Retry.
+		}
+		GameData.UserData.url = www.text;
+		Debug.Log(www.text);
+		GameData.Save();
+    }
 }
